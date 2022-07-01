@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>학점 계산기</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Radio+Canada:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+  </head>
+  <body>
+    <header id="header">
+      <h1>Score <strong>Calculator</strong></h1>
+    </header>
+    <div class="scoreCalculator">
+      <div class="resetBtn">
+        <span class="material-icons"> autorenew </span>
+      </div>
+      <div class="input">
+        <input id="kor" type="number" max="100" min="0" placeholder="국어점수를 입력하세요." />
+        <input id="eng" type="number" max="100" min="0" placeholder="영어점수를 입력하세요." />
+        <input id="math" type="number" max="100" min="0" placeholder="수학점수를 입력하세요." />
+      </div>
+      <button><span class="material-icons"> arrow_drop_down </span></button>
+      <div id="result">?</div>
+    </div>
+    <script>
+      console.log(isNaN(0));
+
+      const kor = document.querySelector("#kor");
+      const eng = document.querySelector("#eng");
+      const math = document.querySelector("#math");
+      const btn = document.querySelector(".scoreCalculator button");
+      const reset = document.querySelector(".resetBtn");
+      reset.addEventListener("click", function () {
+        kor.value = "";
+        eng.value = "";
+        math.value = "";
+        result.textContent = "";
+      });
+      btn.addEventListener("click", function () {
+        const korNum = isNaN(parseInt(kor.value)) ? 0 : parseInt(kor.value);
+        const engNum = isNaN(parseInt(eng.value)) ? 0 : parseInt(eng.value);
+        const mathNum = isNaN(parseInt(math.value)) ? 0 : parseInt(math.value);
+        const total = korNum + engNum + mathNum;
+        const avg = total / 3;
+        // if(isNaN(kor.value));
+        let score = "";
+        if (avg >= 90) {
+          score = "A";
+        } else if (avg >= 80) {
+          score = "B";
+        } else if (avg >= 70) {
+          score = "C";
+        } else if (avg >= 60) {
+          score = "D";
+        } else {
+          score = "F";
+        }
+        result.innerHTML = `<p>총점 : ${total}</p><p>평균 : ${avg.toFixed(2)}</p><p class="score">${score}</p>`;
+      });
+    </script>
+  </body>
+</html>
