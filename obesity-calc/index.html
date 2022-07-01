@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>비만도 계산기</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Radio+Canada:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+  </head>
+  <body>
+    <header id="header">
+      <h1>Obesity <strong>Calculator</strong></h1>
+    </header>
+    <div class="obesityCalculator">
+      <div class="resetBtn">
+        <span class="material-icons"> autorenew </span>
+      </div>
+      <div class="variable">
+        <div class="input">
+          <div class="box01">키</div>
+          <div class="box02">
+            <input id="height" type="number" step="1" max="1000" min="100" placeholder="ex) 170" />
+            <span>cm</span>
+          </div>
+        </div>
+        <div class="input">
+          <div class="box01">몸무게</div>
+          <div class="box02">
+            <input id="weight" type="number" step="1" max="1000" min="10" placeholder="ex) 70" />
+            <span>kg</span>
+          </div>
+        </div>
+      </div>
+      <button><span class="material-icons"> arrow_drop_down </span></button>
+      <div id="result">?</div>
+    </div>
+    <script>
+      const height = document.querySelector("#height");
+      const weight = document.querySelector("#weight");
+      const btn = document.querySelector(".obesityCalculator button");
+      const reset = document.querySelector(".resetBtn");
+      reset.addEventListener("click", function () {
+        height.value = "";
+        weight.value = "";
+        result.textContent = "";
+      });
+      btn.addEventListener("click", function () {
+        const cm = parseInt(height.value) / 10;
+        const kg = parseInt(weight.value);
+        const bmi = (kg / cm ** 2) * 100;
+
+        let bmiTxt = "";
+        if (bmi < 18.5) {
+          bmiTxt = "저체중";
+        } else if (bmi >= 18.5 && bmi < 22.9) {
+          bmiTxt = "정상";
+        } else if (bmi > 23 && bmi < 34.9) {
+          bmiTxt = "과체중";
+        } else {
+          bmiTxt = "고도비만";
+        }
+        result.textContent = `당신의 체질량 지수는 ${bmi.toFixed(2)}이고 ${bmiTxt}입니다`;
+
+        // console.log(result);
+        // console.log(result.toFixed(2));
+        // if (result < 18.5) {
+        //   console.log("저체중");
+        // } else if (result >= 18.5 && result < 22.9) {
+        //   console.log("정상");
+        // } else if (result > 23 && result < 34.9) {
+        //   console.log("과체중");
+        // } else {
+        //   console.log("고도비만");
+        // }
+      });
+    </script>
+  </body>
+</html>
