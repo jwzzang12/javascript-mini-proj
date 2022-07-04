@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COUNTDOWN</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Radio+Canada:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+  </head>
+  <body>
+    <header id="header">
+      <h1>Remain <strong>Day</strong></h1>
+    </header>
+    <div class="contents">
+      <div class="dateBox">
+        <div id="date"></div>
+      </div>
+      <div class="dayBox">
+        <div class="txt" id="day"><span class="num"></span><span>DAY</span></div>
+        <div class="txt" id="hours"><span class="num"></span><span>HOUR</span></div>
+        <div class="txt" id="mins"><span class="num"></span><span>MIN</span></div>
+        <div class="txt" id="seconds"><span class="num"></span><span>SEC</span></div>
+      </div>
+
+      <div class="timeBox">
+        <div id="time"></div>
+      </div>
+    </div>
+
+    <!-- <div id="clock_container">
+      <div id="seconds"></div>
+    </div> -->
+
+    <script>
+      function showTime() {
+        const now = new Date();
+
+        const year = now.getFullYear(); //네자리 연도 수
+        const month = now.getMonth(); // 월(0~11)
+        const date = now.getDate(); // 일
+        const day = now.getDay(); //요일
+        const days = ["sun", "mon", "tue", "wed", "thur", "fri", "sat"];
+        // let dayTxt = "";
+        // switch (day) {
+        //   case 0:
+        //     dayTxt = "sun";
+        //     break;
+        //   case 1:
+        //     dayTxt = "mon";
+        //     break;
+        //   case 2:
+        //     dayTxt = "tue";
+        //     break;
+        //   case 3:
+        //     dayTxt = "wed";
+        //     break;
+        //   case 4:
+        //     dayTxt = "thur";
+        //     break;
+        //   case 5:
+        //     dayTxt = "fri";
+        //     break;
+        //   case 6:
+        //     dayTxt = "sat";
+        //     break;
+        // }
+
+        const dateDom = document.querySelector("#date");
+        // dateDom.textContent = `${year}/${month + 1}/${date} ${dayTxt}`;
+        dateDom.textContent = `${year}/${month + 1}/${date} ${days[day]}`;
+
+        const hours = now.getHours();
+        const mins = now.getMinutes();
+        const sec = now.getSeconds();
+        const time = document.querySelector("#time");
+        time.textContent = `${hours < 10 ? "0" + hours : hours} : ${mins < 10 ? "0" + mins : mins} : ${sec < 10 ? "0" + sec : sec}`;
+      }
+
+      showTime();
+      setInterval(showTime, 1000);
+
+      function countDown() {
+        const now = new Date();
+        const endDay = new Date("2022/9/22");
+        const total = endDay - now;
+        const totalSeconds = Math.floor(total / 1000);
+        const seconds = totalSeconds % 60;
+        const mins = Math.floor(totalSeconds / 60) % 60;
+        const hours = Math.floor(totalSeconds / 60 / 60) % 24;
+        const days = Math.floor(totalSeconds / 60 / 60 / 24);
+
+        const daysDom = document.querySelector("#day .num");
+        const hoursDom = document.querySelector("#hours .num");
+        const minsDom = document.querySelector("#mins .num");
+        const secondsDom = document.querySelector("#seconds .num");
+
+        // if (hours < 10) {
+        //   hours = "0" + hours;
+        // }
+        // if (mins < 10) {
+        //   mins = "0" + mins;
+        // }
+        // if (seconds < 10) {
+        //   seconds = "0" + seconds;
+        // == 이 경우에는 해당되는 변수 앞을 let으로 바꿔야됨}
+
+        daysDom.textContent = days;
+        hoursDom.textContent = hours < 10 ? "0" + hours : hours;
+        minsDom.textContent = mins < 10 ? "0" + mins : mins;
+        secondsDom.textContent = seconds < 10 ? "0" + seconds : seconds;
+      }
+      countDown();
+      setInterval(countDown, 1000);
+    </script>
+  </body>
+</html>

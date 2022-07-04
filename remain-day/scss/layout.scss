@@ -1,0 +1,105 @@
+@import "vars";
+@import "mixin";
+
+body {
+  font-family: "Radio Canada", "Noto Sans KR", sans-serif;
+  font-size: $font-normal;
+  color: #111;
+  //prettier-ignore
+  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 1px, 0, transparent 50px);
+  background-color: #333;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+h1 {
+  font-size: 18px;
+  font-weight: 300;
+  text-transform: uppercase;
+  @include longShadow(#ccc, 50);
+  strong {
+    font-weight: 700;
+  }
+}
+.contents {
+  width: 100%;
+  margin: 100px auto 50px;
+  max-width: 640px;
+}
+.dateBox {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 300;
+  text-align: right;
+  text-transform: uppercase;
+}
+.dayBox {
+  margin: 100px auto;
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 300;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  .txt {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    margin: 0 20px;
+  }
+  .num {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+}
+.timeBox {
+  margin: 100px auto;
+  color: #fff;
+  font-size: 5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+// #clock_container {
+//   position: absolute;
+//   top: 20px;
+//   left: 20px;
+//   width: 150px;
+//   height: 150px;
+//   border-radius: 50%;
+//   border: 2px solid black;
+// }
+
+// #seconds {
+//   height: 50%;
+//   width: 0px;
+//   box-sizing: border-box;
+//   border: 1px solid black;
+//   top: 0%;
+//   left: 50%;
+//   position: absolute;
+//   transform-origin: bottom;
+//   /* of-course, would be 60s */
+//   animation: secondsMotion 10s infinite linear;
+// }
+
+// @keyframes secondsMotion {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
