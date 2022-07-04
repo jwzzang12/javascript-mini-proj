@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>환율계산기</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Radio+Canada:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+  </head>
+  <body>
+    <header id="header">
+      <h1>Exchange <strong>Machine</strong></h1>
+    </header>
+    <div class="moneyCalculator">
+      <div class="changeBtn">
+        <a href="index02.html"><span class="material-icons"> autorenew </span></a>
+      </div>
+      <div class="input">
+        <div class="box01">대한민국 원</div>
+        <div class="box02">
+          <span>&#8361;</span>
+          <input type="number" step="10" max="10000000" min="1000000" id="money" placeholder="1" />
+        </div>
+      </div>
+      <button><span class="material-icons"> arrow_drop_down </span></button>
+      <div class="result">
+        <dl>
+          <dt>미국 달러</dt>
+          <dd id="resultBox">0.00081</dd>
+        </dl>
+      </div>
+    </div>
+    <script>
+      //vanilla script
+      const money = document.querySelector("#money");
+      const btn = document.querySelector(".moneyCalculator button");
+      btn.addEventListener("click", function () {
+        const tempMoney = money.value;
+        resultBox.textContent = (tempMoney * 0.00081).toFixed(2);
+      });
+    </script>
+  </body>
+</html>
