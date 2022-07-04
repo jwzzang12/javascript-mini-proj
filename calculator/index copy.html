@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CALCULATOR</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Radio+Canada:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <script src="js/lodash.js"></script>
+  </head>
+  <body>
+    <header id="header">
+      <h1><strong>CALCULATOR</strong></h1>
+    </header>
+    <div class="inputBox">
+      <input type="number" id="first" />
+      <input type="number" id="second" />
+      <input type="number" id="result" value="" readonly />
+    </div>
+    <div class="operators">
+      <button id="plus">+</button>
+      <button id="minus">-</button>
+      <button id="multiple">×</button>
+      <button id="divide">÷</button>
+    </div>
+    <script>
+      const plusBtn = document.querySelector("#plus");
+      const minusBtn = document.querySelector("#minus");
+      const multipleBtn = document.querySelector("#multiple");
+      const divideBtn = document.querySelector("#divide");
+
+      const first = document.querySelector("#first");
+      const second = document.querySelector("#second");
+      const result = document.querySelector("#result");
+      function plus(firstNum, secondNum) {
+        let firstNum = parseInt(first.value);
+        let secondNum = parseInt(second.value);
+        return firstNum + secondNum;
+      }
+      function minus(a, b) {
+        return a - b;
+      }
+      function multiple(a, b) {
+        return a * b;
+      }
+      function divide(a, b) {
+        return a / b;
+      }
+      //callback 함수 - 정의만 해놓으면 이벤트가 발생할 때마다 실행되는 함수
+      // plusBtn.addEventListener("click, plusFunc")
+      plusBtn.addEventListener("click", function () {
+        result.value = plus();
+      });
+      minusBtn.addEventListener("click", function () {
+        minus(firstNum, secondNum);
+        let tempResult = minus(firstNum, secondNum);
+        result.value = tempResult;
+      });
+      multipleBtn.addEventListener("click", function () {
+        multiple(firstNum, secondNum);
+        let tempResult = multiple(firstNum, secondNum);
+        result.value = tempResult;
+      });
+      divideBtn.addEventListener("click", function () {
+        divide(firstNum, secondNum);
+        let tempResult = divide(firstNum, secondNum);
+        result.value = tempResult;
+      });
+    </script>
+  </body>
+</html>
