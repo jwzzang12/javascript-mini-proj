@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Colour</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Radio+Canada:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+  </head>
+  <body>
+    <header id="header">
+      <h1>Random <strong>COLOUR</strong></h1>
+    </header>
+    <div class="inputBox">
+      <input type="number" class="input" id="row" step="1" max="20" min="2" placeholder="가로" />
+      <input type="number" class="input" id="col" step="1" max="20" min="2" placeholder="세로" />
+      <button>GENERATOR</button>
+    </div>
+    <div class="colorBox">
+      <table>
+        <tbody class="body"></tbody>
+      </table>
+    </div>
+    <script>
+      const row = document.querySelector("#row");
+      const col = document.querySelector("#col");
+      const btn = document.querySelector(".inputBox button");
+      btn.addEventListener("click", function () {
+        const tbody = document.querySelector(".body");
+        tbody.innerHTML = "";
+        const rowNum = parseInt(row.value);
+        const colNum = parseInt(col.value);
+        for (let i = 0; i < rowNum; i++) {
+          let tempHtml = `<tr>`;
+          for (let j = 0; j < colNum; j++) {
+            const randomColor = Math.floor(Math.random() * 256 * 256 * 256)
+              .toString(16)
+              .padStart(6, 0);
+            // if (randomColor.length < 6) {
+            //   randomColor = randomColor + (Math.random() * 16).toString(16);
+            // }
+            tempHtml += `<td style="background-color:#${randomColor}">#${randomColor}</td>`;
+          }
+          tempHtml += `</tr>`;
+          tbody.innerHTML += tempHtml;
+        }
+      });
+    </script>
+  </body>
+</html>
