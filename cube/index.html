@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CUBE</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <script src="js/greensock/gsap.min.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <header id="header">
+      <h1><strong>CUBE</strong></h1>
+    </header>
+    <main id="main">
+      <div class="scene">
+        <div class="cube">
+          <div class="face front">front</div>
+          <div class="face back">back</div>
+          <div class="face top">top</div>
+          <div class="face bottom">bottom</div>
+          <div class="face left">left</div>
+          <div class="face right">right</div>
+        </div>
+      </div>
+      <div class="btns">
+        <button>FRONT</button>
+        <button>BACK</button>
+        <button>TOP</button>
+        <button>BOTTOM</button>
+        <button>LEFT</button>
+        <button>RIGHT</button>
+      </div>
+    </main>
+  </body>
+  <script>
+    // gsap.to(".cube", { rotateY: 90, ease: "back.inOut", duration: 1 });
+    //f 0,0
+    //b 0,-100
+    //t -90,0
+    //b 90,0
+    //l 0,90
+    //r 0,-90
+    const btn = $(".btns button");
+    const rotationArray = [
+      { tx: 0, ty: 0 },
+      { tx: 0, ty: -180 },
+      { tx: -90, ty: 0 },
+      { tx: 90, ty: 0 },
+      { tx: 0, ty: 90 },
+      { tx: 0, ty: -90 },
+    ];
+
+    const cubeColor = [];
+    $(".cube .face").each(function (idx, item) {
+      cubeColor.push($(item).css("background-color"));
+    });
+    console.log("🚀 ~ file: index.html ~ line 61 ~ cubeColor", cubeColor);
+
+    btn.on("click", function () {
+      const idx = $(this).index();
+      const tx = rotationArray[idx].tx;
+      const ty = rotationArray[idx].ty;
+      gsap.to(".cube", { rotateY: ty, rotateX: tx, ease: "back.inOut", duration: 1 });
+
+      $(this).css("background-color", cubeColor[idx]).siblings().removeAttr("style");
+    });
+  </script>
+</html>

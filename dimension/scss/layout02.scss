@@ -1,0 +1,101 @@
+@import "vars";
+@import "mixin";
+//scss list 배열
+$colors: (rgb(255, 0, 0), rgb(251, 255, 0), #0f0, #00f, rgb(132, 0, 255), rgb(255, 0, 200));
+body {
+  font-family: "Source Code Pro", monospace;
+  font-size: $font-normal;
+  color: #111;
+  //prettier-ignore
+  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 1px, 0, transparent 50px);
+  background-color: rgb(39, 39, 39);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  overflow: hidden;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  h1 {
+    font-size: 20px;
+    font-weight: 300;
+    text-transform: uppercase;
+    @include longShadow(#ccc, 50);
+    strong {
+      font-weight: 700;
+    }
+  }
+}
+$cube-width: 1000px;
+$cube-height: 450px;
+#main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  .scene {
+    width: $cube-width;
+    height: $cube-height;
+    transform: rotateX(-15deg);
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    .list {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform: translateZ(1538px) rotateY(0deg);
+      transform-style: preserve-3d;
+      // transform: translateZ(-$cube-width/2) rotateX(45deg) rotateY(45deg);
+      > li {
+        $total: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        overflow: hidden;
+        font-size: 48px;
+        color: #aaa;
+        text-transform: uppercase;
+        user-select: none;
+        @for $i from 1 through $total {
+          &:nth-child(#{$i}) {
+            transform: rotateY(360deg / $total * ($i - 1)) translateZ(-1538px);
+            opacity: 0.5;
+            background-color: rgba(nth($colors, $i % length($colors) + 1), 0.5);
+          }
+        }
+      }
+    }
+  }
+  .btns {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    bottom: 100px;
+    button {
+      width: 60px;
+      height: 60px;
+      margin: 0 1px;
+      padding: 0;
+      font-family: inherit;
+      font-size: 10px;
+      color: #fff;
+      border: none;
+      text-shadow: 1px 1px 2px red, 0 0 1em blue;
+      background-color: #000;
+      outline: none;
+    }
+  }
+}
