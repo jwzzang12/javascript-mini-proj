@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WORD RELAY</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Radio+Canada:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <script src="js/greensock/gsap.min.js"></script>
+  </head>
+  <body>
+    <header id="header">
+      <h1>WORD <strong>TYPING</strong></h1>
+    </header>
+    <div id="selectedWord"></div>
+    <div id="inputBox">
+      <input type="text" placeholder="단어를 입력하세요." id="inputWord" />
+    </div>
+    <div id="info">2/30</div>
+    <div id="time">4</div>
+    <div id="cover">
+      <ul></ul>
+      <button id="btnRestart">restart</button>
+    </div>
+  </body>
+  <script>
+    const selectedWord = document.querySelector("#selectedWord");
+    const inputWord = document.querySelector("#inputWord");
+    const info = document.querySelector("#info");
+    const time = document.querySelector("#time");
+    let count = "";
+    let randomWord = "";
+    const showWord = function () {
+      randomWord = words.splice(Math.floor(Math.random() * words.length), 1).pop();
+      selectedWord.innerHTML = `<span>${randomWord}</span>`;
+    };
+    const elastic = function () {
+      gsap.from("#inputBox", { x: 100, duration: 0.3, ease: "elastic" });
+    };
+    const resetInputWord = function () {
+      inputWord.value = "";
+      inputWord.focus();
+    };
+    const startTime = new Date();
+    const keyupFunc = function (e) {
+      if (e.keyCode === 13) {
+        const typingWord = inputWord.value;
+        if (randomWord === typingWord) {
+          showWord();
+          resetInputWord();
+          count++;
+          info.textContent = `${count}/${words.length}`;
+          if (count >= words.length) {
+            const endTime = new Date();
+            const elapsedTime = endTime - startTime;
+            const tempSec = Math.floor(elapsedTime / 1000) % 60;
+            const tempMin = Math.floor(elapsedTime / 1000 / 60) % 60;
+            const sec = tempSec < 10 ? "0" + tempSec : tempSec;
+            const min = tempMin < 10 ? "0" + tempMin : tempMin;
+            time.textContent = `${min}:${sec}`;
+          } else {
+            showWord();
+            resetInputWord();
+          }
+        } else {
+          elastic();
+          resetInputWord();
+        }
+      }
+    };
+    let str = "JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.";
+    //어떤 값이 두 번 이상 반복될 때는 변수에 담는걸 고려하기
+    //어떠한 코드가 두 번 이상 반복될 때 함수로 정의
+    //화살표 함수 fat arrow function lamda
+    // const words = str.split(" ").filter((item, index) => item.length > 5);
+    // str = str.replaceAll(".", "");
+    // str = str.replaceAll(",", "");
+    str = str.replaceAll(/[,.()]/g, ""); //배열로 한번에 처리 가능
+
+    const words = str.split(" ").filter(function (item, index) {
+      return item.length > 5 && !item.endsWith(",") && !item.endsWith(".");
+    });
+    const init = function () {
+      inputWord.addEventListener("keyup", keyupFunc);
+    };
+    showWord();
+    init();
+  </script>
+</html>

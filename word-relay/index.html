@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WORD RELAY</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Radio+Canada:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <script src="js/greensock/gsap.min.js"></script>
+  </head>
+  <body>
+    <header id="header">
+      <h1>WORD <strong>RELAY</strong></h1>
+    </header>
+    <div id="wordList">
+      <ul></ul>
+    </div>
+    <div id="inputBox">
+      <input type="text" placeholder="단어를 입력하세요." id="inputWord" />
+    </div>
+    <div id="cover">
+      <ul></ul>
+      <button id="btnRestart">restart</button>
+    </div>
+  </body>
+  <script>
+    const firstWordArray = ["기러기", "호랑이", "소나무", "정발산", "리어카"];
+    const wordArray = [];
+    const inputWord = document.querySelector("#inputWord");
+    const wordList = document.querySelector("#wordList ul");
+
+    const cover = document.querySelector("#cover");
+    const coverResult = document.querySelector("#cover ul");
+    const btnRestart = document.querySelector("#btnRestart");
+
+    wordArray.push(firstWordArray[Math.floor(Math.random() * firstWordArray.length)]);
+    const makeWordList = function () {
+      wordArray.forEach(function (item, index) {
+        wordList.innerHTML += `<li>${item}</li>`;
+      });
+    };
+    const elastic = function () {
+      gsap.from("#inputWord", { x: 100, duration: 0.3, ease: "elastic" });
+    };
+    wordArray.forEach(function (item, index) {
+      wordList.innerHTML = `<li>${item}</li>`;
+    });
+    const keyupFunc = function (e) {
+      if (e.keyCode === 13) {
+        const firstChar = inputWord.value.charAt(0);
+        const lastChar = wordArray[wordArray.length - 1].charAt(2);
+        if (firstChar === lastChar && !wordArray.includes(inputWord.value) && inputWord.value.length === 3) {
+          wordArray.push(inputWord.value);
+          wordList.innerHTML = "";
+          inputWord.value = "";
+          inputWord.focus();
+          makeWordList();
+        } else {
+          inputWord.value = "";
+          inputWord.focus();
+          elastic();
+        }
+      }
+      if (wordArray.length === 3) {
+        cover.classList.add("on");
+      }
+      console.log(wordArray.length);
+    };
+    // setInterval(elastic, 5000);
+    inputWord.addEventListener("keyup", keyupFunc);
+    const restartGame = function () {
+      cover.classList.remove("on");
+      location.reload();
+    };
+    btnRestart.addEventListener("click", restartGame);
+  </script>
+</html>

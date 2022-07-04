@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GREENSOCK</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Radio+Canada:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <script src="js/greensock/gsap.min.js"></script>
+  </head>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #f00;
+      border-radius: 100px;
+    }
+  </style>
+  <body>
+    <div class="box"></div>
+  </body>
+  <script>
+    //x transform: translateX()
+    gsap.to(".box", { x: 800, y: 200, marginLeft: 50, backgroundColor: "#00f", ease: "elastic", duration: 5 });
+    //수치로 적용할 수 있는 속성 전부 가능
+  </script>
+</html>
