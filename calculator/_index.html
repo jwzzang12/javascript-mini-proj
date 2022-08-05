@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CALCULATOR</title>
     <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/common.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,32 +13,24 @@
       rel="stylesheet"
     />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <script src="js/lodash.js"></script>
   </head>
   <body>
-    <div class="window">
-      <div class="menu">
-        <button class="close"><span class="material-icons"> close </span></button>
-        <div class="pattern">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <button class="info">?</button>
-      </div>
-      <h3>CALCULATOR</h3>
-      <div class="inputBox">
-        <input type="number" id="first" />
-        <input type="number" id="second" />
-        <input type="number" id="result" value="" readonly />
-      </div>
-      <div class="operators">
-        <button id="plus">+</button>
-        <button id="minus">-</button>
-        <button id="multiple">×</button>
-        <button id="divide">÷</button>
-      </div>
+    <header id="header">
+      <h1><strong>CALCULATOR</strong></h1>
+    </header>
+    <div class="inputBox">
+      <input type="number" id="first" />
+      <input type="number" id="second" />
+      <input type="number" id="result" value="" readonly />
+    </div>
+    <div class="operators">
+      <button id="plus">+</button>
+      <button id="minus">-</button>
+      <button id="multiple">×</button>
+      <button id="divide">÷</button>
     </div>
     <script>
       const plusBtn = document.querySelector("#plus");
@@ -50,40 +41,47 @@
       const first = document.querySelector("#first");
       const second = document.querySelector("#second");
       const result = document.querySelector("#result");
-      // let firstNum = 0;
-      // let secondNum = 0;
-      function plus(firstNum, secondNum) {
-        firstNum = parseInt(first.value);
-        secondNum = parseInt(second.value);
-        return firstNum + secondNum;
+      function plus(a, b) {
+        return a + b;
       }
-      function minus(firstNum, secondNum) {
-        firstNum = parseInt(first.value);
-        secondNum = parseInt(second.value);
-        return firstNum - secondNum;
+      function minus(a, b) {
+        return a - b;
       }
-      function multiple(firstNum, secondNum) {
-        firstNum = parseInt(first.value);
-        secondNum = parseInt(second.value);
-        return firstNum * secondNum;
+      function multiple(a, b) {
+        return a * b;
       }
-      function divide(firstNum, secondNum) {
-        firstNum = parseInt(first.value);
-        secondNum = parseInt(second.value);
-        return firstNum / secondNum;
+      function divide(a, b) {
+        return a / b;
       }
       //callback 함수 - 정의만 해놓으면 이벤트가 발생할 때마다 실행되는 함수
+      // plusBtn.addEventListener("click, plusFunc")
       plusBtn.addEventListener("click", function () {
-        result.value = plus();
+        const firstNum = parseInt(first.value);
+        const secondNum = parseInt(second.value);
+        plus(firstNum, secondNum);
+        let tempResult = plus(firstNum, secondNum);
+        result.value = tempResult;
       });
       minusBtn.addEventListener("click", function () {
-        result.value = minus();
+        const firstNum = parseInt(first.value);
+        const secondNum = parseInt(second.value);
+        minus(firstNum, secondNum);
+        let tempResult = minus(firstNum, secondNum);
+        result.value = tempResult;
       });
       multipleBtn.addEventListener("click", function () {
-        result.value = multiple();
+        const firstNum = parseInt(first.value);
+        const secondNum = parseInt(second.value);
+        multiple(firstNum, secondNum);
+        let tempResult = multiple(firstNum, secondNum);
+        result.value = tempResult;
       });
       divideBtn.addEventListener("click", function () {
-        result.value = divide();
+        const firstNum = parseInt(first.value);
+        const secondNum = parseInt(second.value);
+        divide(firstNum, secondNum);
+        let tempResult = divide(firstNum, secondNum);
+        result.value = tempResult;
       });
     </script>
   </body>

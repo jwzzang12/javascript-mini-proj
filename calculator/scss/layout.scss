@@ -1,35 +1,68 @@
 @import "vars";
 @import "mixin";
-
+@font-face {
+  font-family: "DOSGothic";
+  font-weight: normal;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff") format("woff");
+  font-style: normal;
+}
 body {
-  font-family: "Radio Canada", "Noto Sans KR", sans-serif;
+  font-family: "DOSGothic";
   font-size: $font-normal;
   color: #111;
-  //prettier-ignore
-  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 1px, 0, transparent 50px);
-  background-color: rgb(52, 184, 189);
+  background-color: #000;
 }
 a {
   color: inherit;
   text-decoration: none;
 }
-#header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 60px;
-  overflow: hidden;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
 }
-h1 {
-  font-size: 20px;
-  font-weight: 300;
-  text-transform: uppercase;
-  @include longShadow(#ccc, 50);
-  strong {
-    font-weight: 700;
+.window {
+  width: 500px;
+  height: 400px;
+  position: relative;
+  margin: 100px auto;
+  background-color: #999;
+  .menu {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 15px;
+    position: relative;
+    background-color: #eee;
+    button {
+      position: absolute;
+      padding: 0 3px;
+      border: solid 1px #111;
+      background-color: #eee;
+      &.close {
+        left: 0;
+        padding: 0;
+        .material-icons {
+          font-size: 12px;
+        }
+      }
+      &.info {
+        right: 0;
+      }
+    }
+    .pattern {
+      span {
+        display: block;
+        width: 500px;
+        height: 1px;
+        background-color: #111;
+        &:not(:last-child) {
+          margin-bottom: 2px;
+        }
+      }
+    }
   }
 }
 .inputBox {
